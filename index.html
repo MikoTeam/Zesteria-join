@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-<meta name="theme-color" content="#05060a" />
+<meta name="theme-color" content="#050a14" />
 <title>Zestiria — Join</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,29 +14,40 @@
   html, body {
     height: 100%;
     font-family: 'JetBrains Mono', monospace;
-    background: #05060a;
+    background: #050a14;
     color: #e8ecf1;
     overflow: hidden;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeSpeed;
   }
 
+  /* ===== BACKGROUND ===== */
   .bg {
     position: fixed; inset: 0;
-    background:
-      radial-gradient(circle at 50% 40%, rgba(56,189,248,0.12), transparent 60%),
-      linear-gradient(180deg, rgba(5,6,10,0.85), rgba(5,6,10,0.97)),
-      url('https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1200&q=70') center/cover no-repeat;
-    z-index: -3;
+    background-color: #050a14;
+    background-image: var(--bg-image);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -4;
     will-change: transform;
     transform: translateZ(0);
+  }
+
+  .bg-overlay {
+    position: fixed; inset: 0;
+    background:
+      radial-gradient(circle at 50% 40%, rgba(56,189,248,0.18), transparent 60%),
+      linear-gradient(180deg, rgba(5,10,20,0.75) 0%, rgba(5,10,20,0.88) 50%, rgba(5,10,20,0.96) 100%);
+    z-index: -3;
+    pointer-events: none;
   }
 
   .grid {
     position: fixed; inset: 0;
     background-image:
-      linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+      linear-gradient(rgba(120,180,255,0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(120,180,255,0.035) 1px, transparent 1px);
     background-size: 55px 55px;
     -webkit-mask-image: radial-gradient(circle at center, black 25%, transparent 80%);
     mask-image: radial-gradient(circle at center, black 25%, transparent 80%);
@@ -62,10 +73,11 @@
     position: absolute;
     width: 3px; height: 3px;
     border-radius: 50%;
-    background: #d4af37;
+    background: #38bdf8;
     will-change: transform, opacity;
     animation: floatUp linear infinite;
     transform: translateZ(0);
+    box-shadow: 0 0 8px currentColor;
   }
   @keyframes floatUp {
     0% { transform: translate3d(0, 100vh, 0); opacity: 0; }
@@ -98,22 +110,23 @@
     gap: 8px;
     padding: 6px 14px;
     border-radius: 50px;
-    background: rgba(212,175,55,0.06);
-    border: 1px solid rgba(212,175,55,0.3);
+    background: rgba(56,189,248,0.08);
+    border: 1px solid rgba(56,189,248,0.35);
     font-family: 'Inter', sans-serif;
     font-size: 10px;
     font-weight: 600;
     letter-spacing: 2px;
-    color: #d4af37;
+    color: #7dd3fc;
     text-transform: uppercase;
     position: relative;
     overflow: hidden;
+    box-shadow: 0 0 20px rgba(56,189,248,0.15);
   }
   .brand-badge::before {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(90deg, transparent, rgba(212,175,55,0.15), transparent);
+    background: linear-gradient(90deg, transparent, rgba(56,189,248,0.2), transparent);
     transform: translateX(-100%);
     animation: badgeShine 4s ease-in-out infinite;
   }
@@ -151,7 +164,7 @@
     position: absolute;
     inset: -12px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(212,175,55,0.7) 0%, rgba(56,189,248,0.3) 40%, transparent 70%);
+    background: radial-gradient(circle, rgba(56,189,248,0.7) 0%, rgba(120,180,255,0.3) 40%, transparent 70%);
     animation: glowPulse 3s ease-in-out infinite;
     will-change: opacity;
     z-index: -1;
@@ -166,25 +179,28 @@
     border-radius: 50%;
     object-fit: cover;
     object-position: center 25%;
-    border: 2px solid rgba(212,175,55,0.8);
+    border: 2px solid rgba(56,189,248,0.85);
     box-shadow:
-      0 0 20px rgba(212,175,55,0.5),
-      0 0 50px rgba(56,189,248,0.2);
+      0 0 20px rgba(56,189,248,0.6),
+      0 0 55px rgba(56,189,248,0.3);
     display: block;
     position: relative;
     z-index: 1;
-    background: #0a0c12;
+    background: #0a1220;
   }
 
+  /* ===== CARD ===== */
   .card {
     position: relative;
     width: 100%;
     max-width: 480px;
     padding: 38px 30px 32px;
     border-radius: 24px;
-    background: rgba(15, 18, 26, 0.78);
-    border: 1px solid rgba(212,175,55,0.3);
-    box-shadow: 0 25px 60px rgba(0,0,0,0.6);
+    background: rgba(10, 18, 32, 0.75);
+    border: 1px solid rgba(56,189,248,0.25);
+    box-shadow:
+      0 25px 60px rgba(0,0,0,0.6),
+      0 0 80px rgba(56,189,248,0.06);
     text-align: center;
     animation: cardEnter 0.8s cubic-bezier(0.22,1,0.36,1) 0.3s both;
     will-change: transform, opacity;
@@ -201,7 +217,7 @@
     position: absolute; inset: -1px;
     border-radius: 24px;
     padding: 1px;
-    background: linear-gradient(135deg, rgba(212,175,55,0.7), rgba(56,189,248,0.5), rgba(212,175,55,0.7));
+    background: linear-gradient(135deg, rgba(56,189,248,0.7), rgba(120,180,255,0.5), rgba(56,189,248,0.7));
     -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
@@ -215,27 +231,33 @@
     50% { opacity: 0.9; }
   }
 
+  /* ===== TITLE ===== */
   .title {
     font-family: 'Cinzel', serif;
     font-size: 26px;
     font-weight: 700;
     letter-spacing: 1px;
     margin-bottom: 12px;
-    background: linear-gradient(90deg, #d4af37, #f5e6a8, #d4af37);
+    background: linear-gradient(90deg, #38bdf8, #93c5fd, #7dd3fc, #38bdf8);
+    background-size: 200% auto;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    animation: titleEnter 0.7s ease 0.5s both;
-    will-change: transform, opacity;
+    animation: titleEnter 0.7s ease 0.5s both, titleShine 4s linear infinite;
+    will-change: transform, opacity, background-position;
+    filter: drop-shadow(0 0 15px rgba(56,189,248,0.4));
   }
   @keyframes titleEnter {
     from { opacity: 0; transform: translate3d(0, -15px, 0); }
     to { opacity: 1; transform: translate3d(0, 0, 0); }
   }
+  @keyframes titleShine {
+    to { background-position: 200% center; }
+  }
 
   .subtitle {
     font-size: 13px;
-    color: #9aa4b2;
+    color: #93c5fd;
     letter-spacing: 1.5px;
     margin-bottom: 26px;
     line-height: 1.7;
@@ -250,16 +272,18 @@
   .cursor-blink {
     display: inline-block;
     width: 7px; height: 13px;
-    background: #d4af37;
+    background: #38bdf8;
     margin-left: 2px;
     vertical-align: middle;
     animation: cursorBlink 0.9s step-end infinite;
+    box-shadow: 0 0 8px #38bdf8;
   }
   @keyframes cursorBlink {
     0%,100% { opacity: 1; }
     50% { opacity: 0; }
   }
 
+  /* ===== TOMBOL ===== */
   .btn-row {
     display: flex;
     align-items: center;
@@ -280,26 +304,31 @@
     font-size: 15px;
     font-weight: 600;
     letter-spacing: 2px;
-    color: #0a0c12;
-    background: linear-gradient(135deg, #d4af37, #f5e6a8, #d4af37);
+    color: #050a14;
+    background: linear-gradient(135deg, #38bdf8, #7dd3fc, #38bdf8);
+    background-size: 200% auto;
     border: none;
     border-radius: 50px;
     cursor: pointer;
     overflow: hidden;
-    box-shadow: 0 0 30px rgba(212,175,55,0.55);
-    transition: transform 0.25s cubic-bezier(0.34,1.4,0.64,1);
+    box-shadow:
+      0 0 30px rgba(56,189,248,0.6),
+      inset 0 2px 0 rgba(255,255,255,0.4),
+      inset 0 -2px 0 rgba(0,0,0,0.15);
+    transition: transform 0.25s cubic-bezier(0.34,1.4,0.64,1), background-position 0.5s;
     will-change: transform;
     transform: translateZ(0);
     -webkit-appearance: none;
   }
   .btn-primary:active {
     transform: translate3d(0, -2px, 0) scale(1.04);
+    background-position: right center;
   }
   .btn-primary::after {
     content: '';
     position: absolute; top: 0; left: -100%;
     width: 60%; height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.7), transparent);
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
     animation: shimmer 3s ease-in-out infinite;
     will-change: transform;
   }
@@ -326,28 +355,30 @@
     width: 52px; height: 52px;
     border-radius: 50%;
     background: rgba(56,189,248,0.1);
-    border: 1px solid rgba(56,189,248,0.45);
+    border: 1px solid rgba(56,189,248,0.5);
     color: #38bdf8;
     cursor: pointer;
     display: flex; align-items: center; justify-content: center;
-    transition: transform 0.35s cubic-bezier(0.34,1.4,0.64,1), background 0.3s;
+    transition: transform 0.35s cubic-bezier(0.34,1.4,0.64,1), background 0.3s, box-shadow 0.3s;
     will-change: transform;
     transform: translateZ(0);
     -webkit-appearance: none;
     padding: 0;
+    box-shadow: 0 0 15px rgba(56,189,248,0.2);
   }
   .btn-icon svg {
     width: 20px;
     height: 20px;
   }
   .btn-icon:active {
-    background: rgba(56,189,248,0.3);
+    background: rgba(56,189,248,0.35);
+    box-shadow: 0 0 30px rgba(56,189,248,0.8);
     transform: translateZ(0) scale(1.1) rotate(180deg);
   }
 
   .counter {
     font-size: 12px;
-    color: #7c8794;
+    color: #94a3b8;
     letter-spacing: 1px;
     display: flex;
     align-items: center;
@@ -361,6 +392,7 @@
     border-radius: 50%;
     background: #22c55e;
     position: relative;
+    box-shadow: 0 0 8px #22c55e;
   }
   .dot::before {
     content: '';
@@ -376,7 +408,7 @@
     100% { transform: scale(2); opacity: 0; }
   }
 
-  /* ===== DIVIDER OFFICIAL LINKS ===== */
+  /* ===== DIVIDER ===== */
   .divider {
     display: flex;
     align-items: center;
@@ -389,18 +421,18 @@
     content: '';
     flex: 1;
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+    background: linear-gradient(90deg, transparent, rgba(56,189,248,0.3), transparent);
   }
   .divider span {
     font-family: 'Inter', sans-serif;
     font-size: 9.5px;
     letter-spacing: 2.5px;
-    color: #5a6472;
+    color: #64748b;
     font-weight: 600;
     text-transform: uppercase;
   }
 
-  /* ===== LINK ROW (Owner / Ofc / Anomali) ===== */
+  /* ===== LINK ROW ===== */
   .link-row {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -443,49 +475,49 @@
     display: block;
   }
 
-  /* Owner - gold */
+  /* Owner - cyan terang */
   .link-btn.owner {
-    color: #e8d27a;
-    background: rgba(212,175,55,0.06);
-    border: 1px solid rgba(212,175,55,0.35);
+    color: #7dd3fc;
+    background: rgba(56,189,248,0.08);
+    border: 1px solid rgba(56,189,248,0.4);
   }
   .link-btn.owner:active {
-    background: rgba(212,175,55,0.18);
-    box-shadow: 0 0 22px rgba(212,175,55,0.7);
-    border-color: rgba(212,175,55,0.7);
+    background: rgba(56,189,248,0.22);
+    box-shadow: 0 0 22px rgba(56,189,248,0.8);
+    border-color: rgba(56,189,248,0.8);
   }
   .link-btn.owner svg {
-    filter: drop-shadow(0 0 5px rgba(212,175,55,0.7));
+    filter: drop-shadow(0 0 5px rgba(56,189,248,0.9));
   }
 
-  /* Ofc - biru */
+  /* OFC - biru medium */
   .link-btn.ofc {
-    color: #7dd3fc;
-    background: rgba(56,189,248,0.06);
-    border: 1px solid rgba(56,189,248,0.35);
+    color: #60a5fa;
+    background: rgba(96,165,250,0.08);
+    border: 1px solid rgba(96,165,250,0.4);
   }
   .link-btn.ofc:active {
-    background: rgba(56,189,248,0.18);
-    box-shadow: 0 0 22px rgba(56,189,248,0.7);
-    border-color: rgba(56,189,248,0.7);
+    background: rgba(96,165,250,0.22);
+    box-shadow: 0 0 22px rgba(96,165,250,0.8);
+    border-color: rgba(96,165,250,0.8);
   }
   .link-btn.ofc svg {
-    filter: drop-shadow(0 0 5px rgba(56,189,248,0.7));
+    filter: drop-shadow(0 0 5px rgba(96,165,250,0.9));
   }
 
-  /* Anomali - ungu */
+  /* Anomali - indigo/violet biru */
   .link-btn.anomali {
-    color: #c084fc;
-    background: rgba(192,132,252,0.06);
-    border: 1px solid rgba(192,132,252,0.35);
+    color: #a5b4fc;
+    background: rgba(165,180,252,0.08);
+    border: 1px solid rgba(165,180,252,0.4);
   }
   .link-btn.anomali:active {
-    background: rgba(192,132,252,0.18);
-    box-shadow: 0 0 22px rgba(192,132,252,0.7);
-    border-color: rgba(192,132,252,0.7);
+    background: rgba(165,180,252,0.22);
+    box-shadow: 0 0 22px rgba(165,180,252,0.8);
+    border-color: rgba(165,180,252,0.8);
   }
   .link-btn.anomali svg {
-    filter: drop-shadow(0 0 5px rgba(192,132,252,0.7));
+    filter: drop-shadow(0 0 5px rgba(165,180,252,0.9));
   }
 
   /* ===== FOOTER ===== */
@@ -494,18 +526,18 @@
     bottom: 16px;
     font-size: 11px;
     letter-spacing: 1.5px;
-    color: #5a6472;
+    color: #64748b;
     text-align: center;
     animation: fadeUp 0.9s ease 1.5s both;
     width: 100%;
     left: 0;
   }
-  .footer span { color: #d4af37; }
+  .footer span { color: #38bdf8; }
 
   /* ===== POPUP ===== */
   .popup {
     position: fixed; inset: 0;
-    background: rgba(5,6,10,0.88);
+    background: rgba(5,10,20,0.88);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -530,9 +562,9 @@
     display: flex;
     flex-direction: column;
     border-radius: 20px;
-    background: rgba(13,16,23,0.98);
-    border: 1px solid rgba(212,175,55,0.45);
-    box-shadow: 0 20px 60px rgba(0,0,0,0.7);
+    background: rgba(10,18,32,0.98);
+    border: 1px solid rgba(56,189,248,0.4);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.7), 0 0 60px rgba(56,189,248,0.15);
     transform: translate3d(0, 40px, 0) scale(0.95);
     opacity: 0;
     transition: transform 0.4s cubic-bezier(0.34,1.4,0.64,1), opacity 0.3s ease;
@@ -547,22 +579,23 @@
   .popup-header {
     padding: 20px 20px 14px;
     text-align: center;
-    border-bottom: 1px solid rgba(212,175,55,0.15);
+    border-bottom: 1px solid rgba(56,189,248,0.15);
     position: relative;
     flex-shrink: 0;
   }
   .popup-header h3 {
     font-family: 'Cinzel', serif;
-    color: #d4af37;
+    color: #38bdf8;
     font-size: 18px;
     letter-spacing: 1.5px;
+    text-shadow: 0 0 15px rgba(56,189,248,0.5);
   }
   .close-x {
     position: absolute;
     top: 14px; right: 14px;
     width: 32px; height: 32px;
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.08);
+    background: rgba(56,189,248,0.05);
+    border: 1px solid rgba(56,189,248,0.15);
     border-radius: 50%;
     color: #94a3b8;
     cursor: pointer;
@@ -575,9 +608,9 @@
     height: 14px;
   }
   .close-x:active {
-    color: #d4af37;
-    background: rgba(212,175,55,0.1);
-    border-color: rgba(212,175,55,0.4);
+    color: #38bdf8;
+    background: rgba(56,189,248,0.15);
+    border-color: rgba(56,189,248,0.5);
     transform: scale(1.1);
   }
 
@@ -593,7 +626,7 @@
   }
   .popup-body::-webkit-scrollbar { width: 4px; }
   .popup-body::-webkit-scrollbar-thumb {
-    background: rgba(212,175,55,0.5);
+    background: rgba(56,189,248,0.5);
     border-radius: 10px;
   }
 
@@ -608,7 +641,7 @@
   }
 
   .popup-body h4 {
-    color: #d4af37;
+    color: #38bdf8;
     font-size: 13.5px;
     letter-spacing: 1px;
     margin-top: 16px;
@@ -637,45 +670,45 @@
     content: '◆';
     position: absolute;
     left: 0;
-    color: #d4af37;
+    color: #38bdf8;
     font-size: 8px;
     top: 6px;
   }
 
   .divider-line {
     border: none;
-    border-top: 1px dashed rgba(212,175,55,0.25);
+    border-top: 1px dashed rgba(56,189,248,0.25);
     margin: 16px 0;
   }
 
   .hastag {
-    color: #38bdf8;
+    color: #7dd3fc;
     font-size: 12.5px;
     line-height: 1.9;
   }
 
   .cn-highlight {
-    color: #d4af37;
+    color: #38bdf8;
     font-weight: 600;
   }
 
   .since {
-    color: #38bdf8;
+    color: #7dd3fc;
     font-weight: 600;
   }
 
   .popup-footer {
     padding: 14px 20px 18px;
-    border-top: 1px solid rgba(212,175,55,0.15);
+    border-top: 1px solid rgba(56,189,248,0.15);
     text-align: center;
     flex-shrink: 0;
   }
   .popup-footer button {
     padding: 11px 36px;
     border-radius: 50px;
-    border: 1px solid rgba(212,175,55,0.5);
+    border: 1px solid rgba(56,189,248,0.5);
     background: transparent;
-    color: #d4af37;
+    color: #38bdf8;
     font-family: 'JetBrains Mono', monospace;
     font-size: 12px;
     letter-spacing: 1.5px;
@@ -684,13 +717,14 @@
     -webkit-appearance: none;
   }
   .popup-footer button:active {
-    background: rgba(212,175,55,0.2);
+    background: rgba(56,189,248,0.2);
+    box-shadow: 0 0 20px rgba(56,189,248,0.6);
     transform: scale(1.05);
   }
 
   .loading {
     position: fixed; inset: 0;
-    background: rgba(5,6,10,0.97);
+    background: rgba(5,10,20,0.97);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -708,11 +742,12 @@
   }
   .spinner {
     width: 55px; height: 55px;
-    border: 3px solid rgba(212,175,55,0.2);
-    border-top-color: #d4af37;
+    border: 3px solid rgba(56,189,248,0.2);
+    border-top-color: #38bdf8;
     border-radius: 50%;
     animation: spin 0.8s linear infinite;
     will-change: transform;
+    box-shadow: 0 0 25px rgba(56,189,248,0.5);
   }
   @keyframes spin {
     to { transform: rotate(360deg); }
@@ -720,12 +755,12 @@
   .loading p {
     font-size: 13px;
     letter-spacing: 2px;
-    color: #d4af37;
+    color: #38bdf8;
     animation: textPulse 1.5s ease-in-out infinite;
   }
   @keyframes textPulse {
     0%,100% { opacity: 0.6; }
-    50% { opacity: 1; }
+    50% { opacity: 1; text-shadow: 0 0 15px rgba(56,189,248,0.8); }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -739,7 +774,8 @@
 </head>
 <body>
 
-  <div class="bg"></div>
+  <div class="bg" id="bgImage"></div>
+  <div class="bg-overlay"></div>
   <div class="grid"></div>
   <div class="particles" id="particles"></div>
   <div class="vignette"></div>
@@ -781,7 +817,7 @@
 
       <div class="counter">
         <span class="dot"></span>
-        <span>200+ Orang sudah join</span>
+        <span>300+ Orang sudah join</span>
       </div>
 
       <!-- DIVIDER -->
@@ -789,10 +825,9 @@
         <span>Official Links</span>
       </div>
 
-      <!-- LINK ROW: Owner / OFC / Anomali (SVG Icons) -->
+      <!-- LINK ROW -->
       <div class="link-row">
 
-        <!-- OWNER -->
         <a class="link-btn owner" id="ownerBtn" href="#" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M3 7l4 4 5-7 5 7 4-4-2 12H5L3 7z"/>
@@ -800,7 +835,6 @@
           <span class="label">Owner</span>
         </a>
 
-        <!-- OFC -->
         <a class="link-btn ofc" id="ofcBtn" href="#" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M12 2l2.5 6.5L21 9l-5 4 1.5 7L12 16.5 6.5 20 8 13 3 9l6.5-.5z"/>
@@ -808,7 +842,6 @@
           <span class="label">OFC</span>
         </a>
 
-        <!-- ANOMALI -->
         <a class="link-btn anomali" id="anomaliBtn" href="#" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="12" r="9"/>
@@ -827,6 +860,7 @@
     </div>
   </div>
 
+  <!-- POPUP RULES -->
   <div class="popup" id="popup">
     <div class="popup-box">
       <div class="popup-header">
@@ -875,15 +909,18 @@
      ⚙️ KONFIGURASI — EDIT DI SINI AJA
      ============================================================ */
   const CONFIG = {
+    // 🖼️ Background foto (taruh link gambar kamu di sini)
+    backgroundURL: 'https://cdn.phototourl.com/free/2026-09-15-4be133be-f52e-47b4-8712-0d7b1fb351da.png',
+
     // 🔗 Link PP (logo)
     logoURL: 'https://cdn.phototourl.com/free/2026-09-15-4be133be-f52e-47b4-8712-0d7b1fb351da.png',
 
-    // 🔗 Tombol SELEKSI
+    // 🔗 Tombol JOIN (WhatsApp channel)
     redirectURL: 'https://chat.whatsapp.com/EK3p4CZw2k8B6LFra4Z5cx?s=cl&p=a&mlu=4&ilr=4',
 
     // 🔗 Link akun
     ownerURL:   'https://tiktok.com/@naellprst_',
-    ofcURL:     'https://tiktok.com/@zestiriacatalys',
+    ofcURL:     'tiktok.com/@zestiriacatalys',
     anomaliURL: 'https://tiktok.com/@mikosenpaii_',
 
     // ✏️ Teks subtitle
@@ -894,7 +931,10 @@
   };
   /* ============================================================ */
 
-  // Apply konfigurasi
+  // Apply background
+  document.getElementById('bgImage').style.setProperty('--bg-image', `url('${CONFIG.backgroundURL}')`);
+
+  // Apply konfigurasi lain
   document.getElementById('logoImg').src = CONFIG.logoURL;
   document.getElementById('titleText').textContent = CONFIG.titleText;
   document.getElementById('ownerBtn').href = CONFIG.ownerURL;
@@ -904,19 +944,20 @@
   /* ===== PARTIKEL ===== */
   (function initParticles() {
     const container = document.getElementById('particles');
-    const count = 10;
+    const count = 14;
     const frag = document.createDocumentFragment();
+    const colors = ['#38bdf8', '#7dd3fc', '#60a5fa', '#a5b4fc'];
     for (let i = 0; i < count; i++) {
       const p = document.createElement('div');
       p.className = 'particle';
       const size = 2 + Math.random() * 3;
-      const isBlue = Math.random() > 0.6;
       p.style.left = Math.random() * 100 + '%';
       p.style.width = size + 'px';
       p.style.height = size + 'px';
       p.style.animationDuration = (8 + Math.random() * 6) + 's';
       p.style.animationDelay = (-Math.random() * 10) + 's';
-      if (isBlue) p.style.background = '#38bdf8';
+      p.style.color = colors[Math.floor(Math.random() * colors.length)];
+      p.style.background = p.style.color;
       frag.appendChild(p);
     }
     container.appendChild(frag);
