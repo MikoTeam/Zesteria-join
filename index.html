@@ -1,1 +1,1005 @@
-https://mikoteam.github.io/Zesteria-join/
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="theme-color" content="#05060a" />
+<title>Zestiria — Join</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Cinzel:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color: transparent; }
+
+  html, body {
+    height: 100%;
+    font-family: 'JetBrains Mono', monospace;
+    background: #05060a;
+    color: #e8ecf1;
+    overflow: hidden;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeSpeed;
+  }
+
+  .bg {
+    position: fixed; inset: 0;
+    background:
+      radial-gradient(circle at 50% 40%, rgba(56,189,248,0.12), transparent 60%),
+      linear-gradient(180deg, rgba(5,6,10,0.85), rgba(5,6,10,0.97)),
+      url('https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1200&q=70') center/cover no-repeat;
+    z-index: -3;
+    will-change: transform;
+    transform: translateZ(0);
+  }
+
+  .grid {
+    position: fixed; inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+    background-size: 55px 55px;
+    -webkit-mask-image: radial-gradient(circle at center, black 25%, transparent 80%);
+    mask-image: radial-gradient(circle at center, black 25%, transparent 80%);
+    z-index: -2;
+    pointer-events: none;
+  }
+
+  .vignette {
+    position: fixed; inset: 0;
+    box-shadow: inset 0 0 180px 50px rgba(0,0,0,0.9);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .particles {
+    position: fixed; inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+    contain: strict;
+  }
+  .particle {
+    position: absolute;
+    width: 3px; height: 3px;
+    border-radius: 50%;
+    background: #d4af37;
+    will-change: transform, opacity;
+    animation: floatUp linear infinite;
+    transform: translateZ(0);
+  }
+  @keyframes floatUp {
+    0% { transform: translate3d(0, 100vh, 0); opacity: 0; }
+    10% { opacity: 0.9; }
+    90% { opacity: 0.9; }
+    100% { transform: translate3d(0, -10vh, 0); opacity: 0; }
+  }
+
+  .wrapper {
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* ===== BRAND BADGE ===== */
+  .brand {
+    margin-bottom: 20px;
+    animation: fadeUp 0.7s ease 0.1s both;
+    will-change: transform, opacity;
+  }
+  .brand-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    border-radius: 50px;
+    background: rgba(212,175,55,0.06);
+    border: 1px solid rgba(212,175,55,0.3);
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: #d4af37;
+    text-transform: uppercase;
+    position: relative;
+    overflow: hidden;
+  }
+  .brand-badge::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(212,175,55,0.15), transparent);
+    transform: translateX(-100%);
+    animation: badgeShine 4s ease-in-out infinite;
+  }
+  @keyframes badgeShine {
+    0%,100% { transform: translateX(-100%); }
+    50% { transform: translateX(100%); }
+  }
+  .brand-badge .pulse-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #22c55e;
+    box-shadow: 0 0 8px #22c55e;
+    animation: pulse 1.5s ease-in-out infinite;
+    flex-shrink: 0;
+  }
+  @keyframes pulse {
+    0%,100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.8); }
+  }
+
+  /* ===== LOGO ===== */
+  .logo-wrap {
+    position: relative;
+    margin-bottom: 25px;
+    animation: logoEnter 0.8s cubic-bezier(0.34,1.4,0.64,1) 0.2s both;
+    will-change: transform, opacity;
+  }
+  @keyframes logoEnter {
+    0% { transform: scale(0.3) rotate(-90deg); opacity: 0; }
+    100% { transform: scale(1) rotate(0); opacity: 1; }
+  }
+
+  .logo-wrap::before {
+    content: '';
+    position: absolute;
+    inset: -12px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(212,175,55,0.7) 0%, rgba(56,189,248,0.3) 40%, transparent 70%);
+    animation: glowPulse 3s ease-in-out infinite;
+    will-change: opacity;
+    z-index: -1;
+  }
+  @keyframes glowPulse {
+    0%,100% { opacity: 0.5; }
+    50% { opacity: 1; }
+  }
+
+  .logo {
+    width: 110px; height: 110px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center 25%;
+    border: 2px solid rgba(212,175,55,0.8);
+    box-shadow:
+      0 0 20px rgba(212,175,55,0.5),
+      0 0 50px rgba(56,189,248,0.2);
+    display: block;
+    position: relative;
+    z-index: 1;
+    background: #0a0c12;
+  }
+
+  .card {
+    position: relative;
+    width: 100%;
+    max-width: 480px;
+    padding: 38px 30px 32px;
+    border-radius: 24px;
+    background: rgba(15, 18, 26, 0.78);
+    border: 1px solid rgba(212,175,55,0.3);
+    box-shadow: 0 25px 60px rgba(0,0,0,0.6);
+    text-align: center;
+    animation: cardEnter 0.8s cubic-bezier(0.22,1,0.36,1) 0.3s both;
+    will-change: transform, opacity;
+    transform: translateZ(0);
+    overflow: hidden;
+  }
+  @keyframes cardEnter {
+    0% { transform: translate3d(0, 50px, 0) scale(0.95); opacity: 0; }
+    100% { transform: translate3d(0, 0, 0) scale(1); opacity: 1; }
+  }
+
+  .card::before {
+    content: '';
+    position: absolute; inset: -1px;
+    border-radius: 24px;
+    padding: 1px;
+    background: linear-gradient(135deg, rgba(212,175,55,0.7), rgba(56,189,248,0.5), rgba(212,175,55,0.7));
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0.6;
+    animation: borderPulse 3s ease-in-out infinite;
+    will-change: opacity;
+    pointer-events: none;
+  }
+  @keyframes borderPulse {
+    0%,100% { opacity: 0.4; }
+    50% { opacity: 0.9; }
+  }
+
+  .title {
+    font-family: 'Cinzel', serif;
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+    background: linear-gradient(90deg, #d4af37, #f5e6a8, #d4af37);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: titleEnter 0.7s ease 0.5s both;
+    will-change: transform, opacity;
+  }
+  @keyframes titleEnter {
+    from { opacity: 0; transform: translate3d(0, -15px, 0); }
+    to { opacity: 1; transform: translate3d(0, 0, 0); }
+  }
+
+  .subtitle {
+    font-size: 13px;
+    color: #9aa4b2;
+    letter-spacing: 1.5px;
+    margin-bottom: 26px;
+    line-height: 1.7;
+    min-height: 22px;
+    animation: fadeUp 0.7s ease 0.7s both;
+    will-change: transform, opacity;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translate3d(0, 12px, 0); }
+    to { opacity: 1; transform: translate3d(0, 0, 0); }
+  }
+  .cursor-blink {
+    display: inline-block;
+    width: 7px; height: 13px;
+    background: #d4af37;
+    margin-left: 2px;
+    vertical-align: middle;
+    animation: cursorBlink 0.9s step-end infinite;
+  }
+  @keyframes cursorBlink {
+    0%,100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  .btn-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 22px;
+    animation: fadeUp 0.7s ease 0.9s both;
+  }
+
+  .btn-primary {
+    position: relative;
+    padding: 14px 34px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: #0a0c12;
+    background: linear-gradient(135deg, #d4af37, #f5e6a8, #d4af37);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    overflow: hidden;
+    box-shadow: 0 0 30px rgba(212,175,55,0.55);
+    transition: transform 0.25s cubic-bezier(0.34,1.4,0.64,1);
+    will-change: transform;
+    transform: translateZ(0);
+    -webkit-appearance: none;
+  }
+  .btn-primary:active {
+    transform: translate3d(0, -2px, 0) scale(1.04);
+  }
+  .btn-primary::after {
+    content: '';
+    position: absolute; top: 0; left: -100%;
+    width: 60%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.7), transparent);
+    animation: shimmer 3s ease-in-out infinite;
+    will-change: transform;
+  }
+  @keyframes shimmer {
+    0% { transform: translate3d(-100%, 0, 0); }
+    60%,100% { transform: translate3d(350%, 0, 0); }
+  }
+  .btn-primary svg {
+    width: 16px;
+    height: 16px;
+    transition: transform 0.3s;
+    position: relative;
+    z-index: 1;
+  }
+  .btn-primary span {
+    position: relative;
+    z-index: 1;
+  }
+  .btn-primary:active svg {
+    transform: translateX(3px);
+  }
+
+  .btn-icon {
+    width: 52px; height: 52px;
+    border-radius: 50%;
+    background: rgba(56,189,248,0.1);
+    border: 1px solid rgba(56,189,248,0.45);
+    color: #38bdf8;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: transform 0.35s cubic-bezier(0.34,1.4,0.64,1), background 0.3s;
+    will-change: transform;
+    transform: translateZ(0);
+    -webkit-appearance: none;
+    padding: 0;
+  }
+  .btn-icon svg {
+    width: 20px;
+    height: 20px;
+  }
+  .btn-icon:active {
+    background: rgba(56,189,248,0.3);
+    transform: translateZ(0) scale(1.1) rotate(180deg);
+  }
+
+  .counter {
+    font-size: 12px;
+    color: #7c8794;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    animation: fadeUp 0.7s ease 1.1s both;
+    margin-bottom: 22px;
+  }
+  .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: #22c55e;
+    position: relative;
+  }
+  .dot::before {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border-radius: 50%;
+    border: 1px solid #22c55e;
+    animation: ring 1.6s ease-out infinite;
+    will-change: transform, opacity;
+  }
+  @keyframes ring {
+    0% { transform: scale(0.8); opacity: 0.8; }
+    100% { transform: scale(2); opacity: 0; }
+  }
+
+  /* ===== DIVIDER OFFICIAL LINKS ===== */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+    animation: fadeUp 0.7s ease 1.25s both;
+  }
+  .divider::before,
+  .divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  }
+  .divider span {
+    font-family: 'Inter', sans-serif;
+    font-size: 9.5px;
+    letter-spacing: 2.5px;
+    color: #5a6472;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+
+  /* ===== LINK ROW (Owner / Ofc / Anomali) ===== */
+  .link-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    animation: fadeUp 0.7s ease 1.35s both;
+  }
+
+  .link-btn {
+    position: relative;
+    padding: 12px 6px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-family: 'Inter', sans-serif;
+    font-size: 9.5px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    border-radius: 12px;
+    cursor: pointer;
+    text-decoration: none;
+    overflow: hidden;
+    transition: transform 0.3s cubic-bezier(0.34,1.4,0.64,1), background 0.3s, box-shadow 0.3s, border-color 0.3s;
+    will-change: transform;
+    transform: translateZ(0);
+    white-space: nowrap;
+    text-transform: uppercase;
+  }
+  .link-btn:active {
+    transform: translate3d(0, -2px, 0) scale(1.04);
+  }
+  .link-btn svg {
+    width: 18px;
+    height: 18px;
+    display: block;
+    transition: transform 0.3s;
+  }
+  .link-btn .label {
+    display: block;
+  }
+
+  /* Owner - gold */
+  .link-btn.owner {
+    color: #e8d27a;
+    background: rgba(212,175,55,0.06);
+    border: 1px solid rgba(212,175,55,0.35);
+  }
+  .link-btn.owner:active {
+    background: rgba(212,175,55,0.18);
+    box-shadow: 0 0 22px rgba(212,175,55,0.7);
+    border-color: rgba(212,175,55,0.7);
+  }
+  .link-btn.owner svg {
+    filter: drop-shadow(0 0 5px rgba(212,175,55,0.7));
+  }
+
+  /* Ofc - biru */
+  .link-btn.ofc {
+    color: #7dd3fc;
+    background: rgba(56,189,248,0.06);
+    border: 1px solid rgba(56,189,248,0.35);
+  }
+  .link-btn.ofc:active {
+    background: rgba(56,189,248,0.18);
+    box-shadow: 0 0 22px rgba(56,189,248,0.7);
+    border-color: rgba(56,189,248,0.7);
+  }
+  .link-btn.ofc svg {
+    filter: drop-shadow(0 0 5px rgba(56,189,248,0.7));
+  }
+
+  /* Anomali - ungu */
+  .link-btn.anomali {
+    color: #c084fc;
+    background: rgba(192,132,252,0.06);
+    border: 1px solid rgba(192,132,252,0.35);
+  }
+  .link-btn.anomali:active {
+    background: rgba(192,132,252,0.18);
+    box-shadow: 0 0 22px rgba(192,132,252,0.7);
+    border-color: rgba(192,132,252,0.7);
+  }
+  .link-btn.anomali svg {
+    filter: drop-shadow(0 0 5px rgba(192,132,252,0.7));
+  }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    position: absolute;
+    bottom: 16px;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    color: #5a6472;
+    text-align: center;
+    animation: fadeUp 0.9s ease 1.5s both;
+    width: 100%;
+    left: 0;
+  }
+  .footer span { color: #d4af37; }
+
+  /* ===== POPUP ===== */
+  .popup {
+    position: fixed; inset: 0;
+    background: rgba(5,6,10,0.88);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 90;
+    padding: 16px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s;
+    will-change: opacity;
+  }
+  .popup.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .popup-box {
+    position: relative;
+    width: 100%;
+    max-width: 420px;
+    max-height: 85vh;
+    max-height: 85dvh;
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+    background: rgba(13,16,23,0.98);
+    border: 1px solid rgba(212,175,55,0.45);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.7);
+    transform: translate3d(0, 40px, 0) scale(0.95);
+    opacity: 0;
+    transition: transform 0.4s cubic-bezier(0.34,1.4,0.64,1), opacity 0.3s ease;
+    will-change: transform, opacity;
+    overflow: hidden;
+  }
+  .popup.active .popup-box {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 1;
+  }
+
+  .popup-header {
+    padding: 20px 20px 14px;
+    text-align: center;
+    border-bottom: 1px solid rgba(212,175,55,0.15);
+    position: relative;
+    flex-shrink: 0;
+  }
+  .popup-header h3 {
+    font-family: 'Cinzel', serif;
+    color: #d4af37;
+    font-size: 18px;
+    letter-spacing: 1.5px;
+  }
+  .close-x {
+    position: absolute;
+    top: 14px; right: 14px;
+    width: 32px; height: 32px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 50%;
+    color: #94a3b8;
+    cursor: pointer;
+    transition: 0.3s;
+    display: flex; align-items: center; justify-content: center;
+    padding: 0;
+  }
+  .close-x svg {
+    width: 14px;
+    height: 14px;
+  }
+  .close-x:active {
+    color: #d4af37;
+    background: rgba(212,175,55,0.1);
+    border-color: rgba(212,175,55,0.4);
+    transform: scale(1.1);
+  }
+
+  .popup-body {
+    padding: 20px 22px;
+    overflow-y: auto;
+    text-align: left;
+    font-size: 12.5px;
+    line-height: 1.85;
+    color: #cbd5e1;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+  }
+  .popup-body::-webkit-scrollbar { width: 4px; }
+  .popup-body::-webkit-scrollbar-thumb {
+    background: rgba(212,175,55,0.5);
+    border-radius: 10px;
+  }
+
+  .fade-in {
+    opacity: 0;
+    transform: translate3d(-15px, 0, 0);
+    animation: fadeInLeft 0.4s ease forwards;
+    will-change: transform, opacity;
+  }
+  @keyframes fadeInLeft {
+    to { opacity: 1; transform: translate3d(0, 0, 0); }
+  }
+
+  .popup-body h4 {
+    color: #d4af37;
+    font-size: 13.5px;
+    letter-spacing: 1px;
+    margin-top: 16px;
+    margin-bottom: 8px;
+    font-family: 'Cinzel', serif;
+  }
+  .popup-body h4:first-child { margin-top: 0; }
+
+  .popup-body .welcome {
+    color: #f1f5f9;
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 4px;
+  }
+
+  .popup-body ul {
+    list-style: none;
+    padding-left: 0;
+  }
+  .popup-body ul li {
+    position: relative;
+    padding-left: 18px;
+    margin-bottom: 6px;
+  }
+  .popup-body ul li::before {
+    content: '◆';
+    position: absolute;
+    left: 0;
+    color: #d4af37;
+    font-size: 8px;
+    top: 6px;
+  }
+
+  .divider-line {
+    border: none;
+    border-top: 1px dashed rgba(212,175,55,0.25);
+    margin: 16px 0;
+  }
+
+  .hastag {
+    color: #38bdf8;
+    font-size: 12.5px;
+    line-height: 1.9;
+  }
+
+  .cn-highlight {
+    color: #d4af37;
+    font-weight: 600;
+  }
+
+  .since {
+    color: #38bdf8;
+    font-weight: 600;
+  }
+
+  .popup-footer {
+    padding: 14px 20px 18px;
+    border-top: 1px solid rgba(212,175,55,0.15);
+    text-align: center;
+    flex-shrink: 0;
+  }
+  .popup-footer button {
+    padding: 11px 36px;
+    border-radius: 50px;
+    border: 1px solid rgba(212,175,55,0.5);
+    background: transparent;
+    color: #d4af37;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    cursor: pointer;
+    transition: 0.3s;
+    -webkit-appearance: none;
+  }
+  .popup-footer button:active {
+    background: rgba(212,175,55,0.2);
+    transform: scale(1.05);
+  }
+
+  .loading {
+    position: fixed; inset: 0;
+    background: rgba(5,6,10,0.97);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+    z-index: 99;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s;
+    will-change: opacity;
+  }
+  .loading.active {
+    opacity: 1;
+    visibility: visible;
+  }
+  .spinner {
+    width: 55px; height: 55px;
+    border: 3px solid rgba(212,175,55,0.2);
+    border-top-color: #d4af37;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    will-change: transform;
+  }
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+  .loading p {
+    font-size: 13px;
+    letter-spacing: 2px;
+    color: #d4af37;
+    animation: textPulse 1.5s ease-in-out infinite;
+  }
+  @keyframes textPulse {
+    0%,100% { opacity: 0.6; }
+    50% { opacity: 1; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+</style>
+</head>
+<body>
+
+  <div class="bg"></div>
+  <div class="grid"></div>
+  <div class="particles" id="particles"></div>
+  <div class="vignette"></div>
+
+  <div class="wrapper">
+
+    <!-- BRAND BADGE -->
+    <div class="brand">
+      <div class="brand-badge">
+        <span class="pulse-dot"></span>
+        <span>Zestiria Catalyst</span>
+      </div>
+    </div>
+
+    <div class="logo-wrap">
+      <img class="logo" id="logoImg" src="" alt="Zestiria Catalyst" />
+    </div>
+
+    <div class="card">
+      <h1 class="title" id="titleText">JOIN ZESTIRIA</h1>
+      <p class="subtitle"><span id="typewriter"></span><span class="cursor-blink"></span></p>
+
+      <div class="btn-row">
+        <button class="btn-primary" onclick="startSeleksi()">
+          <span>JOIN!!</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </button>
+        <button class="btn-icon" onclick="openInfo()" title="Rules">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+            <line x1="12" y1="17" x2="12.01" y2="17"></line>
+          </svg>
+        </button>
+      </div>
+
+      <div class="counter">
+        <span class="dot"></span>
+        <span>200+ Orang sudah join</span>
+      </div>
+
+      <!-- DIVIDER -->
+      <div class="divider">
+        <span>Official Links</span>
+      </div>
+
+      <!-- LINK ROW: Owner / OFC / Anomali (SVG Icons) -->
+      <div class="link-row">
+
+        <!-- OWNER -->
+        <a class="link-btn owner" id="ownerBtn" href="#" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 7l4 4 5-7 5 7 4-4-2 12H5L3 7z"/>
+          </svg>
+          <span class="label">Owner</span>
+        </a>
+
+        <!-- OFC -->
+        <a class="link-btn ofc" id="ofcBtn" href="#" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2l2.5 6.5L21 9l-5 4 1.5 7L12 16.5 6.5 20 8 13 3 9l6.5-.5z"/>
+          </svg>
+          <span class="label">OFC</span>
+        </a>
+
+        <!-- ANOMALI -->
+        <a class="link-btn anomali" id="anomaliBtn" href="#" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="9"/>
+            <circle cx="9" cy="10" r="1.2" fill="currentColor"/>
+            <circle cx="15" cy="10" r="1.2" fill="currentColor"/>
+            <path d="M8 16c1.5-1.5 6.5-1.5 8 0"/>
+          </svg>
+          <span class="label">Anomali</span>
+        </a>
+
+      </div>
+    </div>
+
+    <div class="footer">
+      Website | by <span>@mikosenpaii_</span>
+    </div>
+  </div>
+
+  <div class="popup" id="popup">
+    <div class="popup-box">
+      <div class="popup-header">
+        <h3>RULES ZESTIRIA</h3>
+        <button class="close-x" onclick="closeInfo()" aria-label="Close">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <div class="popup-body" id="popupBody">
+        <p class="welcome fade-in" style="animation-delay:0.05s">Welcome To Zestiria Catalyst</p>
+        <p class="fade-in" style="color:#94a3b8; font-size:12px; margin-bottom:14px; animation-delay:0.1s">Baru comeback jir</p>
+
+        <p class="fade-in" style="animation-delay:0.15s"><b>since :</b> <span class="since">07-09-2025</span></p>
+
+        <h4 class="fade-in" style="animation-delay:0.2s">Ruless Zestiria!!!</h4>
+        <ul id="rulesList"></ul>
+
+        <hr class="divider-line fade-in" style="animation-delay:0.6s" />
+
+        <h4 class="fade-in" style="animation-delay:0.65s">Hastag :</h4>
+        <p class="hastag fade-in" style="animation-delay:0.7s">#margazestiria<br>#zestiriacreator</p>
+
+        <hr class="divider-line fade-in" style="animation-delay:0.75s" />
+
+        <h4 class="fade-in" style="animation-delay:0.8s">CN</h4>
+        <p class="fade-in" style="animation-delay:0.85s"><span class="cn-highlight">✨ Silakan pilih salah satu cn!</span><br>Namamu ft ZC</p>
+      </div>
+
+      <div class="popup-footer">
+        <button onclick="closeInfo()">TUTUP</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="loading" id="loading">
+    <div class="spinner"></div>
+    <p>MEMPROSES JOIN...</p>
+  </div>
+
+<script>
+  /* ============================================================
+     ⚙️ KONFIGURASI — EDIT DI SINI AJA
+     ============================================================ */
+  const CONFIG = {
+    // 🔗 Link PP (logo)
+    logoURL: 'https://cdn.phototourl.com/free/2026-09-15-4be133be-f52e-47b4-8712-0d7b1fb351da.png',
+
+    // 🔗 Tombol SELEKSI
+    redirectURL: 'https://chat.whatsapp.com/EK3p4CZw2k8B6LFra4Z5cx?s=cl&p=a&mlu=4&ilr=4',
+
+    // 🔗 Link akun
+    ownerURL:   'https://tiktok.com/@naellprst_',
+    ofcURL:     'https://tiktok.com/@zestiriacatalys',
+    anomaliURL: 'https://tiktok.com/@mikosenpaii_',
+
+    // ✏️ Teks subtitle
+    subtitleText: 'Join di sini 👇👇',
+
+    // 📝 Judul
+    titleText: 'JOIN ZESTIRIA'
+  };
+  /* ============================================================ */
+
+  // Apply konfigurasi
+  document.getElementById('logoImg').src = CONFIG.logoURL;
+  document.getElementById('titleText').textContent = CONFIG.titleText;
+  document.getElementById('ownerBtn').href = CONFIG.ownerURL;
+  document.getElementById('ofcBtn').href = CONFIG.ofcURL;
+  document.getElementById('anomaliBtn').href = CONFIG.anomaliURL;
+
+  /* ===== PARTIKEL ===== */
+  (function initParticles() {
+    const container = document.getElementById('particles');
+    const count = 10;
+    const frag = document.createDocumentFragment();
+    for (let i = 0; i < count; i++) {
+      const p = document.createElement('div');
+      p.className = 'particle';
+      const size = 2 + Math.random() * 3;
+      const isBlue = Math.random() > 0.6;
+      p.style.left = Math.random() * 100 + '%';
+      p.style.width = size + 'px';
+      p.style.height = size + 'px';
+      p.style.animationDuration = (8 + Math.random() * 6) + 's';
+      p.style.animationDelay = (-Math.random() * 10) + 's';
+      if (isBlue) p.style.background = '#38bdf8';
+      frag.appendChild(p);
+    }
+    container.appendChild(frag);
+  })();
+
+  /* ===== TYPEWRITER ===== */
+  (function typewriter() {
+    const text = CONFIG.subtitleText;
+    const el = document.getElementById('typewriter');
+    let i = 0;
+    let lastTime = 0;
+    const speed = 70;
+
+    function step(timestamp) {
+      if (!lastTime) lastTime = timestamp;
+      if (timestamp - lastTime >= speed) {
+        if (i < text.length) {
+          el.textContent += text.charAt(i);
+          i++;
+          lastTime = timestamp;
+        } else {
+          return;
+        }
+      }
+      requestAnimationFrame(step);
+    }
+    setTimeout(() => requestAnimationFrame(step), 1000);
+  })();
+
+  /* ===== RULES LIST ===== */
+  const rules = [
+    'No jomok, yang jomok di jadikan tumbal proyek',
+    'No saling hujat',
+    'Saling respect',
+    'No spam (sticker, chat dll)',
+    'Wajib pake CN',
+    'Wajib pake Hastag',
+    'Hargai Admin',
+    'Sider 5h di entod admin',
+    'Sider 7h di kick tanpa terkecuali',
+    'Boleh DB',
+    'No send/promosi Gc lain',
+    'No spam c.a satt, brisik'
+  ];
+  const rulesList = document.getElementById('rulesList');
+  const frag = document.createDocumentFragment();
+  rules.forEach((rule, i) => {
+    const li = document.createElement('li');
+    li.textContent = rule;
+    li.className = 'fade-in';
+    li.style.animationDelay = (0.25 + i * 0.05) + 's';
+    frag.appendChild(li);
+  });
+  rulesList.appendChild(frag);
+
+  /* ===== FUNGSI ===== */
+  let isLoading = false;
+  function startSeleksi() {
+    if (isLoading) return;
+    isLoading = true;
+    document.getElementById('loading').classList.add('active');
+    setTimeout(() => {
+      window.location.href = CONFIG.redirectURL;
+    }, 2000);
+  }
+
+  function openInfo() {
+    const popup = document.getElementById('popup');
+    popup.classList.add('active');
+    const items = popup.querySelectorAll('.fade-in');
+    items.forEach(el => {
+      el.style.animation = 'none';
+      void el.offsetWidth;
+      el.style.animation = '';
+    });
+  }
+  function closeInfo() {
+    document.getElementById('popup').classList.remove('active');
+  }
+
+  document.getElementById('popup').addEventListener('click', (e) => {
+    if (e.target.id === 'popup') closeInfo();
+  });
+</script>
+</body>
+</html>
