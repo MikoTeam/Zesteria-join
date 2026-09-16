@@ -46,7 +46,7 @@ const CONFIG = {
   /* ==========================================================
      🔗 LINK JOIN (setelah lolos seleksi)
      ========================================================== */
-  joinURL: 'https://chat.whatsapp.com/EK3p4CZw2k8B6LFra4Z5cx?s=cl&p=a&mlu=4&ilr=4',
+  joinURL: 'https://chat.whatsapp.com/Dsv0filIr8X3e00VKAiQbN?s=cl&p=a&mlu=4&ilr=4',
   
   /* ==========================================================
      👥 OFFICIAL LINKS (Owner / OFC / Anomali)
