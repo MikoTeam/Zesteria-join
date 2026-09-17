@@ -5,20 +5,17 @@ const CONFIG = {
   
   /* ==========================================================
      🔗 URL BOT SERVER (Cloudflare Tunnel)
-     
-     ⚠️ URL INI BAKAL BERUBAH KALAU TUNNEL RESTART
-     
-     Base URL ini dipakai buat 2 endpoint:
-       - POST /api/check-username  → cek CN & follower
-       - POST /api/check-video     → cek hashtag di video
-     
-     Cara cek URL terbaru di VPS:
-     pm2 logs zestiria-tunnel --lines 100 --nostream | grep -oP 'https://[a-z-]+\.trycloudflare\.com' | tail -1
+     ⚠️ URL BAKAL BERUBAH KALAU TUNNEL RESTART
      ========================================================== */
   API_URL: 'https://aside-efforts-ethernet-determine.trycloudflare.com',
   
   /* ==========================================================
-     🎨 TAMPILAN
+     🔗 LINK GRUP WA
+     ========================================================== */
+  joinURL: 'https://chat.whatsapp.com/Dsv0filIr8X3e00VKAiQbN?s=cl&p=a&mlu=4&ilr=4',
+  
+  /* ==========================================================
+     🎨 BRANDING
      ========================================================== */
   branding: {
     name: 'Zestiria Catalyst',
@@ -29,8 +26,72 @@ const CONFIG = {
   },
   
   /* ==========================================================
-     🎯 ATURAN SELEKSI (referensi frontend)
-     Catatan: aturan utama ada di server.js (VPS)
+     📝 TEXT-TOMBOL & LABEL
+     ========================================================== */
+  texts: {
+    step1: 'Cek Akun',
+    step2: 'Cek Video',
+    step3: 'Join',
+    
+    btnCheckUsername: 'CEK AKUN',
+    btnCheckVideo: 'CEK VIDEO',
+    btnBack: '← Kembali ke Tahap 1',
+    btnJoin: 'KIRIM BUKTI',
+    btnJoinGroup: 'JOIN GRUP',
+    btnUploadBukti: 'KIRIM BUKTI',
+    btnRetry: 'COBA LAGI',
+    btnClose: 'TUTUP',
+    btnCheckStatus: 'CEK STATUS',
+    btnBackHome: 'KEMBALI',
+    
+    placeholderUsername: 'username',
+    placeholderVideo: 'https://vt.tiktok.com/...',
+    placeholderWa: '628xxxxxxxxxx',
+    
+    titleSuccess: 'SELAMAT!',
+    subtitleSuccess: 'Kamu lolos seleksi 🎉',
+    titleFail: 'MAAF',
+    failMessageDefault: 'Kamu belum memenuhi syarat.',
+    
+    loadingUsername: 'MENGECEK AKUN...',
+    loadingVideo: 'MENGECEK VIDEO...',
+    loadingUpload: 'MENGIRIM BUKTI...',
+    loadingStatus: 'MENGECEK STATUS...',
+    
+    helpTitle: 'INFO CN & HASHTAG',
+    helpCNTitle: '📝 Format CN (Nama TikTok)',
+    helpCNDesc: 'Pilih salah satu format di bawah, ganti "namamu" dengan nama kamu:',
+    helpHashtagTitle: '🏷️ Hashtag Wajib',
+    helpHashtagDesc: 'Video kamu harus ada salah satu hashtag ini di caption:',
+    helpTips: '💡 <strong>Tips:</strong> Setelah ganti CN di TikTok, tunggu 1-2 menit biar ke-update, baru cek lagi di sini.',
+    btnCopy: 'Salin',
+    btnCopied: 'Disalin!',
+    
+    uploadTitle: 'KIRIM BUKTI',
+    uploadSubtitle: 'Isi data buat verifikasi admin',
+    uploadFileHint: '+ Pilih Gambar (max 5 MB)',
+    uploadBtnSend: 'KIRIM BUKTI',
+    
+    statusTitle: 'STATUS BUKTI',
+    statusPending: '⏳ MENUNGGU REVIEW',
+    statusPendingDesc: 'Bukti kamu masih diproses admin.',
+    statusAcc: '✅ DITERIMA!',
+    statusAccDesc: 'Selamat! Kamu akan di-invite ke grup oleh admin.',
+    statusTolak: '❌ DITOLAK',
+    statusNotFound: 'Belum ada submission',
+    
+    counterLabel: 'Orang Sedang Seleksi',
+    
+    countdownLabel: 'Seleksi ditutup dalam',
+    countdownEnded: 'Seleksi telah ditutup',
+    countdownDays: 'hari',
+    countdownHours: 'jam',
+    countdownMinutes: 'menit',
+    countdownSeconds: 'detik',
+  },
+  
+  /* ==========================================================
+     🎯 ATURAN SELEKSI
      ========================================================== */
   tahap1: {
     minFollower: 30,
@@ -44,12 +105,48 @@ const CONFIG = {
   blacklist: ['6287761249828', '6285809026857'],
   
   /* ==========================================================
-     🔗 LINK JOIN (setelah lolos seleksi)
+     📊 COUNTER
      ========================================================== */
-  joinURL: 'https://chat.whatsapp.com/Dsv0filIr8X3e00VKAiQbN?s=cl&p=a&mlu=4&ilr=4',
+  counter: {
+    enabled: true,
+    pollingInterval: 3000,
+  },
   
   /* ==========================================================
-     👥 OFFICIAL LINKS (Owner / OFC / Anomali)
+     ⏱️ COUNTDOWN
+     ========================================================== */
+  countdown: {
+    enabled: true,
+    endTime: '2026-09-20T23:59:59',
+  },
+  
+  /* ==========================================================
+     🎉 EFFECTS
+     ========================================================== */
+  effects: {
+    confetti: true,
+    sound: true,
+  },
+  
+  /* ==========================================================
+     📝 POPUP HELP — FORMAT CN
+     ========================================================== */
+  helpCN: [
+    { label: "『𝐙𝐂』𝙉𝙖𝙢𝙖𝙡𝙪" },
+    { label: "𝙉𝙖𝙢𝙖𝙡𝙪 ft 𝐙𝐂" },
+    { label: "𝙉𝙖𝙢𝙖𝙡𝙪 Zet'cee" },
+  ],
+  
+  /* ==========================================================
+     🏷️ POPUP HELP — HASHTAG WAJIB
+     ========================================================== */
+  helpHashtag: [
+    { label: "#margazestiria" },
+    { label: "#zestiriacreator" },
+  ],
+  
+  /* ==========================================================
+     👥 OFFICIAL LINKS
      ========================================================== */
   official: {
     owner: 'https://tiktok.com/@naellprst_',
@@ -57,21 +154,6 @@ const CONFIG = {
     anomali: 'https://tiktok.com/@mikosenpaii_',
   },
   
-  /* ==========================================================
-     🔗 LINK KAMI (kosongin [] biar section-nya auto-hide)
-     
-     Format:
-     {
-       type: 'wa' | 'tiktok' | 'discord' | 'instagram' | 'youtube' | 'default',
-       title: 'Judul Link',
-       desc: 'Deskripsi singkat',
-       url: 'https://...',
-     }
-     ========================================================== */
   links: [],
-  
-  /* ==========================================================
-     🛒 ORDER (kosongin [] biar section-nya auto-hide)
-     ========================================================== */
   orders: [],
 };
