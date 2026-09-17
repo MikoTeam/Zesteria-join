@@ -20,9 +20,10 @@
   <div class="particles" id="particles"></div>
   <div class="vignette"></div>
 
+  <canvas id="confettiCanvas" class="confetti-canvas"></canvas>
+
   <div class="wrapper">
 
-    <!-- BRAND BADGE -->
     <div class="brand">
       <div class="brand-badge">
         <span class="pulse-dot"></span>
@@ -30,10 +31,30 @@
       </div>
     </div>
 
-    <!-- CARD -->
+    <div class="countdown-widget" id="countdownWidget">
+      <div class="countdown-label" id="countdownLabel">Seleksi ditutup dalam</div>
+      <div class="countdown-timer">
+        <div class="countdown-box">
+          <span class="countdown-num" id="cdDays">00</span>
+          <span class="countdown-unit" id="cdDaysLabel">hari</span>
+        </div>
+        <div class="countdown-box">
+          <span class="countdown-num" id="cdHours">00</span>
+          <span class="countdown-unit" id="cdHoursLabel">jam</span>
+        </div>
+        <div class="countdown-box">
+          <span class="countdown-num" id="cdMinutes">00</span>
+          <span class="countdown-unit" id="cdMinutesLabel">menit</span>
+        </div>
+        <div class="countdown-box">
+          <span class="countdown-num" id="cdSeconds">00</span>
+          <span class="countdown-unit" id="cdSecondsLabel">detik</span>
+        </div>
+      </div>
+    </div>
+
     <div class="card">
 
-      <!-- STEP BAR -->
       <div class="step-bar">
         <div class="step active" id="stepIndicator1">
           <span class="step-num">1</span>
@@ -58,23 +79,25 @@
 
         <div class="input-group">
           <span class="input-prefix">@</span>
-          <input
-            type="text"
-            id="usernameInput"
-            placeholder="username"
-            autocomplete="off"
-            spellcheck="false"
-            maxlength="30"
-          />
+          <input type="text" id="usernameInput" placeholder="username" autocomplete="off" spellcheck="false" maxlength="30" />
         </div>
 
-        <button class="btn-primary" onclick="checkUsername()">
-          <span>CEK AKUN</span>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="5" y1="12" x2="19" y2="12"></line>
-            <polyline points="12 5 19 12 12 19"></polyline>
-          </svg>
-        </button>
+        <div class="btn-row-main">
+          <button class="btn-primary" onclick="checkUsername()">
+            <span>CEK AKUN</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </button>
+          <button class="btn-icon-main" onclick="openHelp()" title="Info CN & Hashtag">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+              <line x1="12" y1="17" x2="12.01" y2="17"></line>
+            </svg>
+          </button>
+        </div>
 
         <div class="status-box" id="status1"></div>
       </div>
@@ -85,29 +108,32 @@
         <p class="subtitle">Tempel link video TikTok kamu</p>
 
         <div class="input-group">
-          <input
-            type="url"
-            id="videoInput"
-            placeholder="https://tiktok.com/@user/video/..."
-            autocomplete="off"
-            spellcheck="false"
-          />
+          <input type="url" id="videoInput" placeholder="https://vt.tiktok.com/..." autocomplete="off" spellcheck="false" />
         </div>
 
-        <button class="btn-primary" onclick="checkVideo()">
-          <span>CEK VIDEO</span>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="5" y1="12" x2="19" y2="12"></line>
-            <polyline points="12 5 19 12 12 19"></polyline>
-          </svg>
-        </button>
+        <div class="btn-row-main">
+          <button class="btn-primary" onclick="checkVideo()">
+            <span>CEK VIDEO</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </button>
+          <button class="btn-icon-main" onclick="openHelp()" title="Info CN & Hashtag">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+              <line x1="12" y1="17" x2="12.01" y2="17"></line>
+            </svg>
+          </button>
+        </div>
 
         <button class="btn-ghost" onclick="backToStage1()">← Kembali ke Tahap 1</button>
 
         <div class="status-box" id="status2"></div>
       </div>
 
-      <!-- TAHAP 3 -->
+      <!-- TAHAP 3: LOLOS -->
       <div class="stage" id="stage3">
         <div class="success-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
@@ -119,12 +145,77 @@
 
         <div class="result-info" id="resultInfo"></div>
 
-        <button class="btn-primary btn-join" onclick="joinNow()">
-          <span>JOIN SEKARANG</span>
+        <div class="btn-row-actions">
+          <button class="btn-join-group" onclick="joinGroup()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
+            <span>JOIN GRUP</span>
+          </button>
+          <button class="btn-upload-bukti" onclick="openUploadForm()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="17 8 12 3 7 8"></polyline>
+              <line x1="12" y1="3" x2="12" y2="15"></line>
+            </svg>
+            <span>KIRIM BUKTI</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- STAGE UPLOAD BUKTI (pelengkap, bukan step baru) -->
+      <div class="stage" id="stageUpload">
+        <h1 class="title">KIRIM BUKTI</h1>
+        <p class="subtitle">Isi data buat verifikasi admin</p>
+
+        <div class="input-group">
+          <span class="input-prefix">@</span>
+          <input type="text" id="uploadUsername" placeholder="username" autocomplete="off" spellcheck="false" />
+        </div>
+
+        <div class="input-group">
+          <input type="tel" id="uploadWa" placeholder="628xxxxxxxxxx" autocomplete="off" />
+        </div>
+
+        <div class="file-upload-wrap">
+          <input type="file" id="uploadFile" accept="image/*" onchange="handleFileChange(event)" hidden />
+          <label for="uploadFile" class="file-upload-label" id="fileUploadLabel">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+              <circle cx="8.5" cy="8.5" r="1.5"></circle>
+              <polyline points="21 15 16 10 5 21"></polyline>
+            </svg>
+            <span id="fileLabelText">+ Pilih Gambar (max 5 MB)</span>
+          </label>
+          <div class="file-preview" id="filePreview"></div>
+        </div>
+
+        <button class="btn-primary" onclick="submitBukti()" id="btnSubmitBukti">
+          <span>KIRIM BUKTI</span>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="5" y1="12" x2="19" y2="12"></line>
-            <polyline points="12 5 19 12 12 19"></polyline>
+            <line x1="22" y1="2" x2="11" y2="13"></line>
+            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
           </svg>
+        </button>
+
+        <button class="btn-ghost" onclick="checkStatus()">CEK STATUS</button>
+
+        <div class="status-box" id="statusUpload"></div>
+      </div>
+
+      <!-- STAGE STATUS BUKTI -->
+      <div class="stage" id="stageStatus">
+        <div class="status-icon-wrap" id="statusIconWrap">
+          <div class="status-icon" id="statusIcon"></div>
+        </div>
+        <h1 class="title" id="statusTitle">STATUS BUKTI</h1>
+        <p class="subtitle" id="statusDesc">-</p>
+
+        <button class="btn-primary" onclick="resetAll()">
+          <span>KEMBALI</span>
         </button>
       </div>
 
@@ -146,53 +237,29 @@
 
     </div>
 
-    <!-- OFFICIAL LINKS -->
-    <div class="official-section">
-      <div class="divider">
-        <span>Official Links</span>
-      </div>
+    <div class="counter-widget" id="counterWidget">
+      <span class="counter-dot"></span>
+      <span class="counter-text">
+        <strong id="counterValue">300</strong> Orang Sedang Seleksi
+      </span>
+    </div>
 
+    <div class="official-section">
+      <div class="divider"><span>Official Links</span></div>
       <div class="link-row">
         <a class="link-btn owner" id="ownerBtn" href="#" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M3 7l4 4 5-7 5 7 4-4-2 12H5L3 7z"/>
-          </svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7l4 4 5-7 5 7 4-4-2 12H5L3 7z"/></svg>
           <span class="label">Owner</span>
         </a>
-
         <a class="link-btn ofc" id="ofcBtn" href="#" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 2l2.5 6.5L21 9l-5 4 1.5 7L12 16.5 6.5 20 8 13 3 9l6.5-.5z"/>
-          </svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.5 6.5L21 9l-5 4 1.5 7L12 16.5 6.5 20 8 13 3 9l6.5-.5z"/></svg>
           <span class="label">OFC</span>
         </a>
-
         <a class="link-btn anomali" id="anomaliBtn" href="#" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="9"/>
-            <circle cx="9" cy="10" r="1.2" fill="currentColor"/>
-            <circle cx="15" cy="10" r="1.2" fill="currentColor"/>
-            <path d="M8 16c1.5-1.5 6.5-1.5 8 0"/>
-          </svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="9" cy="10" r="1.2" fill="currentColor"/><circle cx="15" cy="10" r="1.2" fill="currentColor"/><path d="M8 16c1.5-1.5 6.5-1.5 8 0"/></svg>
           <span class="label">Anomali</span>
         </a>
       </div>
-    </div>
-
-    <!-- LINK KAMI (auto-hide kalau kosong) -->
-    <div class="official-section" id="linksSection">
-      <div class="divider">
-        <span>Link Kami</span>
-      </div>
-      <div class="links-list" id="linksList"></div>
-    </div>
-
-    <!-- ORDER (auto-hide kalau kosong) -->
-    <div class="official-section" id="ordersSection">
-      <div class="divider">
-        <span>Order</span>
-      </div>
-      <div class="links-list" id="ordersList"></div>
     </div>
 
     <div class="footer">
@@ -200,7 +267,31 @@
     </div>
   </div>
 
-  <!-- LOADING -->
+  <div class="popup" id="helpPopup">
+    <div class="popup-box">
+      <div class="popup-header">
+        <h3>INFO CN & HASHTAG</h3>
+        <button class="close-x" onclick="closeHelp()" aria-label="Close">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+      <div class="popup-body">
+        <h4>📝 Format CN (Nama TikTok)</h4>
+        <p class="help-desc">Pilih salah satu format di bawah, ganti "namamu" dengan nama kamu:</p>
+        <div id="helpCNList"></div>
+        <hr class="divider-line" />
+        <h4>🏷️ Hashtag Wajib</h4>
+        <p class="help-desc">Video kamu harus ada salah satu hashtag ini di caption:</p>
+        <div id="helpHashtagList"></div>
+        <hr class="divider-line" />
+        <p class="help-note">💡 <strong>Tips:</strong> Setelah ganti CN di TikTok, tunggu 1-2 menit biar ke-update, baru cek lagi di sini.</p>
+      </div>
+      <div class="popup-footer">
+        <button onclick="closeHelp()">TUTUP</button>
+      </div>
+    </div>
+  </div>
+
   <div class="loading" id="loading">
     <div class="spinner"></div>
     <p id="loadingText">MEMPROSES...</p>
@@ -209,4 +300,4 @@
   <script src="config.js"></script>
   <script src="script.js"></script>
 </body>
-</html>class=""
+</html>
