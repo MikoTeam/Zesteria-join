@@ -1,216 +1,414 @@
 /* ============================================================
-   ⚙️ CONFIG TERPUSAT
+   ADMIN.JS — Logic Panel Admin
+   ============================================================ */
+
+/* ============================================================
+   ⚙️ CONFIG
    ============================================================ */
 const CONFIG = {
-
-  /* ==========================================================
-     🔗 API URL
-     ========================================================== */
   API_URL: 'https://aside-efforts-ethernet-determine.trycloudflare.com',
-
-  /* ==========================================================
-     🎨 BRANDING
-     ========================================================== */
-  branding: {
-    name: 'Zestiria Catalyst',
-    backgroundURL: 'https://cdn.phototourl.com/free/2026-09-16-c90714dc-c5e6-4011-afa6-dca780478ba3.jpg',
-    footer: '@mikosenpaii_',
-  },
-
-  /* ==========================================================
-     🌐 BAHASA
-     ========================================================== */
-  defaultLang: 'id',
-
-  i18n: {
-    id: {
-      step1: 'Cek Akun', step2: 'Cek Video', step3: 'Join',
-
-      titleUsername: 'CEK AKUN TIKTOK',
-      subtitleUsername: 'Masukkan username TikTok kamu',
-      placeholderUsername: 'username',
-      btnCheckUsername: 'CEK AKUN',
-
-      titleVideo: 'CEK VIDEO TIKTOK',
-      subtitleVideo: 'Tempel link video TikTok kamu',
-      placeholderVideo: 'https://vt.tiktok.com/...',
-      btnCheckVideo: 'CEK VIDEO',
-      btnBack: '← Kembali ke Tahap 1',
-
-      titleSuccess: 'SELAMAT!',
-      subtitleSuccess: 'Kamu lolos seleksi 🎉',
-      btnJoin: 'KIRIM BUKTI',
-
-      titleFail: 'MAAF',
-      failMessageDefault: 'Kamu belum memenuhi syarat.',
-      btnRetry: 'COBA LAGI',
-
-      loadingUsername: 'MENGECEK AKUN...',
-      loadingVideo: 'MENGECEK VIDEO...',
-      loadingJoin: 'MEMBUKA FORM...',
-
-      helpTitle: 'INFO CN & HASHTAG',
-      helpCNTitle: '📝 Format CN (Nama TikTok)',
-      helpCNDesc: 'Pilih salah satu format di bawah:',
-      helpHashtagTitle: '🏷️ Hashtag Wajib',
-      helpHashtagDesc: 'Video harus ada salah satu hashtag ini:',
-      helpTips: '💡 <strong>Tips:</strong> Setelah ganti CN, tunggu 1-2 menit biar ke-update.',
-      btnCopy: 'Salin',
-      btnCopied: 'Disalin!',
-      btnClose: 'TUTUP',
-
-      counterLabel: 'Orang Sedang Seleksi',
-
-      countdownLabel: 'Seleksi ditutup dalam',
-      countdownEnded: 'Seleksi telah ditutup',
-      countdownDays: 'hari', countdownHours: 'jam', countdownMinutes: 'menit', countdownSeconds: 'detik',
-
-      errEmptyUsername: '❌ Username tidak boleh kosong!',
-      errEmptyVideo: '❌ Link video tidak boleh kosong!',
-      errNotTiktok: '❌ Link harus dari TikTok!',
-      errConnect: '❌ <strong>Gagal konek ke server</strong><br><br>Coba lagi...',
-      errBlacklist: '🚫 <strong>Akun di-blacklist!</strong>',
-      errGeneric: 'Terjadi kesalahan',
-
-      // Upload form
-      uploadTitle: 'KIRIM BUKTI',
-      uploadSubtitle: 'Isi data di bawah buat verifikasi',
-      uploadUsername: 'Username TikTok',
-      uploadWa: 'Nomor WhatsApp',
-      uploadPlaceholderUsername: 'username',
-      uploadPlaceholderWa: '628xxxxxxxxxx',
-      uploadScreenshot: 'Screenshot Bukti',
-      uploadFileHint: '+ Pilih Gambar (max 5 MB)',
-      uploadBtnSend: 'KIRIM BUKTI',
-      uploadSuccess: '✅ Bukti terkirim!',
-      uploadSuccessDesc: 'Bukti kamu sedang di-review admin. Tunggu max 1x24 jam.',
-
-      // Status
-      statusTitle: 'STATUS BUKTI',
-      statusPending: '⏳ MENUNGGU REVIEW',
-      statusPendingDesc: 'Bukti kamu masih diproses admin.',
-      statusAcc: '✅ DITERIMA!',
-      statusAccDesc: 'Selamat! Kamu akan segera di-invite ke grup.',
-      statusTolak: '❌ DITOLAK',
-      statusTolakDesc: 'Maaf, bukti kamu tidak valid.',
-      statusNotFound: 'Belum ada submission',
-      btnCheckStatus: 'CEK STATUS',
-    },
-    en: {
-      step1: 'Check Account', step2: 'Check Video', step3: 'Join',
-
-      titleUsername: 'CHECK TIKTOK ACCOUNT',
-      subtitleUsername: 'Enter your TikTok username',
-      placeholderUsername: 'username',
-      btnCheckUsername: 'CHECK ACCOUNT',
-
-      titleVideo: 'CHECK TIKTOK VIDEO',
-      subtitleVideo: 'Paste your TikTok video link',
-      placeholderVideo: 'https://vt.tiktok.com/...',
-      btnCheckVideo: 'CHECK VIDEO',
-      btnBack: '← Back to Step 1',
-
-      titleSuccess: 'CONGRATULATIONS!',
-      subtitleSuccess: 'You passed the selection 🎉',
-      btnJoin: 'SEND PROOF',
-
-      titleFail: 'SORRY',
-      failMessageDefault: 'You have not met the requirements.',
-      btnRetry: 'TRY AGAIN',
-
-      loadingUsername: 'CHECKING ACCOUNT...',
-      loadingVideo: 'CHECKING VIDEO...',
-      loadingJoin: 'OPENING FORM...',
-
-      helpTitle: 'CN & HASHTAG INFO',
-      helpCNTitle: '📝 CN Format',
-      helpCNDesc: 'Choose one format below:',
-      helpHashtagTitle: '🏷️ Required Hashtag',
-      helpHashtagDesc: 'Video must have one of these hashtags:',
-      helpTips: '💡 <strong>Tips:</strong> After changing CN, wait 1-2 minutes to update.',
-      btnCopy: 'Copy',
-      btnCopied: 'Copied!',
-      btnClose: 'CLOSE',
-
-      counterLabel: 'People Selecting',
-
-      countdownLabel: 'Selection closes in',
-      countdownEnded: 'Selection has ended',
-      countdownDays: 'days', countdownHours: 'hours', countdownMinutes: 'minutes', countdownSeconds: 'seconds',
-
-      errEmptyUsername: '❌ Username cannot be empty!',
-      errEmptyVideo: '❌ Video link cannot be empty!',
-      errNotTiktok: '❌ Link must be from TikTok!',
-      errConnect: '❌ <strong>Failed to connect</strong>',
-      errBlacklist: '🚫 <strong>Account blacklisted!</strong>',
-      errGeneric: 'An error occurred',
-
-      uploadTitle: 'SEND PROOF',
-      uploadSubtitle: 'Fill in the data for verification',
-      uploadUsername: 'TikTok Username',
-      uploadWa: 'WhatsApp Number',
-      uploadPlaceholderUsername: 'username',
-      uploadPlaceholderWa: '628xxxxxxxxxx',
-      uploadScreenshot: 'Screenshot Proof',
-      uploadFileHint: '+ Choose Image (max 5 MB)',
-      uploadBtnSend: 'SEND PROOF',
-      uploadSuccess: '✅ Proof sent!',
-      uploadSuccessDesc: 'Your proof is under review. Wait max 1x24 hours.',
-
-      statusTitle: 'PROOF STATUS',
-      statusPending: '⏳ WAITING REVIEW',
-      statusPendingDesc: 'Your proof is still being processed.',
-      statusAcc: '✅ ACCEPTED!',
-      statusAccDesc: 'Congratulations! You will be invited to the group.',
-      statusTolak: '❌ REJECTED',
-      statusTolakDesc: 'Sorry, your proof is not valid.',
-      statusNotFound: 'No submission yet',
-      btnCheckStatus: 'CHECK STATUS',
-    },
-  },
-
-  countdown: {
-    enabled: true,
-    endTime: '2026-09-20T23:59:59',
-  },
-
-  effects: {
-    confetti: true,
-    sound: true,
-  },
-
-  tahap1: { minFollower: 30 },
-  tahap2: {
-    wajibDomain: 'tiktok.com',
-    wajibHashtag: ['margazestiria', 'zestiriacreator'],
-  },
-
-  blacklist: ['6287761249828', '6285809026857'],
-
-  counter: {
-    enabled: true,
-    pollingInterval: 3000,
-  },
-
-  helpCN: [
-    { label: "『𝐙𝐂』𝙉𝙖𝙢𝙖𝙡𝙪" },
-    { label: "𝙉𝙖𝙢𝙖𝙡𝙪 ft 𝐙𝐂" },
-    { label: "𝙉𝙖𝙢𝙖𝙡𝙪 Zet'cee" },
-  ],
-
-  helpHashtag: [
-    { label: "#margazestiria" },
-    { label: "#zestiriacreator" },
-  ],
-
-  joinURL: 'https://chat.whatsapp.com/EK3p4CZw2k8B6LFra4Z5cx?s=cl&p=a&mlu=4&ilr=4',
-
-  official: {
-    owner:   'https://tiktok.com/@naellprst_',
-    ofc:     'https://tiktok.com/@zestiriacatalys',
-    anomali: 'https://tiktok.com/@mikosenpaii_',
-  },
-
-  links: [],
-  orders: [],
 };
+
+/* ============================================================
+   STATE
+   ============================================================ */
+let adminToken = sessionStorage.getItem('admin_token') || null;
+let adminName = sessionStorage.getItem('admin_name') || '';
+let allSubmissions = [];
+let currentFilter = 'all';
+let currentSubmissionId = null;
+let currentPage = 'branda';
+
+/* ============================================================
+   HELPER
+   ============================================================ */
+function showLoading() {
+  document.getElementById('loading').classList.add('active');
+}
+
+function hideLoading() {
+  document.getElementById('loading').classList.remove('active');
+}
+
+function showToast(msg, type = 'info') {
+  const toast = document.getElementById('toast');
+  toast.textContent = msg;
+  toast.className = 'toast ' + type;
+  setTimeout(() => toast.classList.add('show'), 10);
+  setTimeout(() => toast.classList.remove('show'), 2500);
+}
+
+function formatDate(iso) {
+  const d = new Date(iso);
+  const pad = n => String(n).padStart(2, '0');
+  return `${pad(d.getDate())}/${pad(d.getMonth()+1)}/${d.getFullYear()} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
+}
+
+/* ============================================================
+   LOGIN
+   ============================================================ */
+async function doLogin() {
+  const username = document.getElementById('loginUsername').value.trim();
+  const password = document.getElementById('loginPassword').value.trim();
+  const errorEl = document.getElementById('loginError');
+
+  errorEl.textContent = '';
+
+  if (!username || !password) {
+    errorEl.textContent = '❌ Username & password wajib diisi';
+    return;
+  }
+
+  showLoading();
+
+  try {
+    const res = await fetch(`${CONFIG.API_URL}/api/admin/login`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, password }),
+    });
+
+    const data = await res.json();
+    hideLoading();
+
+    if (data.success) {
+      adminToken = data.token;
+      adminName = data.username || username;
+      sessionStorage.setItem('admin_token', adminToken);
+      sessionStorage.setItem('admin_name', adminName);
+      showDashboard();
+      loadBranda();
+      loadSubmissions();
+      showToast('✅ Login berhasil — ' + adminName, 'success');
+    } else {
+      errorEl.textContent = '❌ ' + (data.message || 'Login gagal');
+    }
+  } catch (err) {
+    hideLoading();
+    errorEl.textContent = '❌ Gagal konek ke server';
+    console.error(err);
+  }
+}
+
+function doLogout() {
+  if (!confirm('Yakin mau logout?')) return;
+  adminToken = null;
+  adminName = '';
+  sessionStorage.removeItem('admin_token');
+  sessionStorage.removeItem('admin_name');
+  document.getElementById('dashboard').style.display = 'none';
+  document.getElementById('loginScreen').style.display = 'flex';
+  document.getElementById('loginUsername').value = '';
+  document.getElementById('loginPassword').value = '';
+  showToast('🚪 Logout berhasil');
+}
+
+function showDashboard() {
+  document.getElementById('loginScreen').style.display = 'none';
+  document.getElementById('dashboard').style.display = 'block';
+}
+
+/* ============================================================
+   SWITCH PAGE
+   ============================================================ */
+function switchPage(page) {
+  currentPage = page;
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+
+  document.getElementById('page' + page.charAt(0).toUpperCase() + page.slice(1)).classList.add('active');
+  document.querySelector(`.nav-item[data-page="${page}"]`).classList.add('active');
+
+  if (page === 'branda') loadBranda();
+  if (page === 'verify') loadSubmissions();
+}
+
+/* ============================================================
+   LOAD BRANDA (statistik)
+   ============================================================ */
+async function loadBranda() {
+  if (!adminToken) return;
+
+  try {
+    // Ambil counter
+    const counterRes = await fetch(`${CONFIG.API_URL}/api/get-counter`);
+    const counterData = await counterRes.json();
+    if (counterData.success) {
+      document.getElementById('counterValue').textContent = counterData.count;
+    }
+
+    // Ambil submissions
+    const res = await fetch(`${CONFIG.API_URL}/api/admin/submissions`, {
+      headers: { 'x-admin-token': adminToken },
+    });
+    const data = await res.json();
+    if (data.success) {
+      allSubmissions = data.data || [];
+      renderStats();
+    }
+  } catch (err) {
+    console.error('[BRANDA] Error:', err);
+  }
+}
+
+/* ============================================================
+   RENDER STATS
+   ============================================================ */
+function renderStats() {
+  const total = allSubmissions.length;
+  const pending = allSubmissions.filter(s => s.status === 'pending').length;
+  const acc = allSubmissions.filter(s => s.status === 'acc').length;
+  const tolak = allSubmissions.filter(s => s.status === 'tolak').length;
+
+  document.getElementById('statTotal').textContent = total;
+  document.getElementById('statPending').textContent = pending;
+  document.getElementById('statAcc').textContent = acc;
+  document.getElementById('statTolak').textContent = tolak;
+}
+
+/* ============================================================
+   LOAD SUBMISSIONS
+   ============================================================ */
+async function loadSubmissions() {
+  if (!adminToken) return;
+  showLoading();
+
+  try {
+    const res = await fetch(`${CONFIG.API_URL}/api/admin/submissions`, {
+      headers: { 'x-admin-token': adminToken },
+    });
+
+    const data = await res.json();
+    hideLoading();
+
+    if (data.success) {
+      allSubmissions = data.data || [];
+      renderStats();
+      renderList();
+    } else {
+      showToast('❌ ' + (data.message || 'Gagal load data'), 'error');
+    }
+  } catch (err) {
+    hideLoading();
+    showToast('❌ Gagal konek ke server', 'error');
+    console.error(err);
+  }
+}
+
+/* ============================================================
+   RENDER LIST
+   ============================================================ */
+function renderList() {
+  const container = document.getElementById('submissionList');
+  const filtered = currentFilter === 'all'
+    ? allSubmissions
+    : allSubmissions.filter(s => s.status === currentFilter);
+
+  if (filtered.length === 0) {
+    container.innerHTML = `
+      <div class="empty-state">
+        <div class="empty-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="22 12 16 12 14 15 10 15 8 12 2 12"></polyline>
+            <path d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"></path>
+          </svg>
+        </div>
+        <div class="empty-text">Belum ada submission</div>
+      </div>
+    `;
+    return;
+  }
+
+  const statusLabel = {
+    pending: 'Pending',
+    acc: 'ACC',
+    tolak: 'Tolak',
+  };
+
+  container.innerHTML = filtered.map(s => `
+    <div class="submission-card status-${s.status}" onclick="openDetail('${s.id}')">
+      <div class="sub-avatar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+          <circle cx="12" cy="7" r="4"></circle>
+        </svg>
+      </div>
+      <div class="sub-content">
+        <div class="sub-username">@${s.username}</div>
+        <div class="sub-meta">
+          <span>${s.wa}</span>
+          <span>${formatDate(s.waktu)}</span>
+        </div>
+      </div>
+      <div class="sub-status ${s.status}">${statusLabel[s.status] || s.status}</div>
+    </div>
+  `).join('');
+}
+
+/* ============================================================
+   FILTER
+   ============================================================ */
+function setFilter(filter) {
+  currentFilter = filter;
+  document.querySelectorAll('.filter-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.filter === filter);
+  });
+  renderList();
+}
+
+/* ============================================================
+   MODAL DETAIL
+   ============================================================ */
+function openDetail(id) {
+  const sub = allSubmissions.find(s => s.id === id);
+  if (!sub) return;
+
+  currentSubmissionId = id;
+
+  document.getElementById('modalUsername').textContent = '@' + sub.username;
+  document.getElementById('detailWa').textContent = sub.wa;
+  document.getElementById('detailWaktu').textContent = formatDate(sub.waktu);
+
+  const statusText = 
+    sub.status === 'pending' ? '⏳ Menunggu review' :
+    sub.status === 'acc' ? '✅ Diterima' :
+    '❌ Ditolak' + (sub.alasan ? ' — ' + sub.alasan : '');
+  document.getElementById('detailStatus').textContent = statusText;
+
+  const imgEl = document.getElementById('detailImage');
+  imgEl.src = `${CONFIG.API_URL}/uploads/${sub.screenshot}`;
+
+  const footer = document.getElementById('modalFooter');
+  footer.style.display = sub.status === 'pending' ? 'flex' : 'none';
+
+  document.getElementById('modalDetail').classList.add('active');
+}
+
+function closeModal() {
+  document.getElementById('modalDetail').classList.remove('active');
+  currentSubmissionId = null;
+}
+
+/* ============================================================
+   APPROVE
+   ============================================================ */
+async function approveCurrent() {
+  if (!currentSubmissionId) return;
+  if (!confirm('Yakin ACC submission ini?')) return;
+
+  showLoading();
+
+  try {
+    const res = await fetch(`${CONFIG.API_URL}/api/admin/approve`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-admin-token': adminToken,
+      },
+      body: JSON.stringify({ id: currentSubmissionId }),
+    });
+
+    const data = await res.json();
+    hideLoading();
+
+    if (data.success) {
+      showToast('✅ User di-ACC', 'success');
+      closeModal();
+      loadSubmissions();
+      loadBranda();
+    } else {
+      showToast('❌ ' + data.message, 'error');
+    }
+  } catch (err) {
+    hideLoading();
+    showToast('❌ Gagal konek', 'error');
+  }
+}
+
+/* ============================================================
+   REJECT
+   ============================================================ */
+function openRejectModal() {
+  document.getElementById('rejectReason').value = '';
+  document.getElementById('modalReject').classList.add('active');
+}
+
+function closeRejectModal() {
+  document.getElementById('modalReject').classList.remove('active');
+}
+
+async function confirmReject() {
+  if (!currentSubmissionId) return;
+
+  const alasan = document.getElementById('rejectReason').value.trim();
+  if (!alasan) {
+    showToast('❌ Alasan wajib diisi', 'error');
+    return;
+  }
+
+  showLoading();
+
+  try {
+    const res = await fetch(`${CONFIG.API_URL}/api/admin/reject`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-admin-token': adminToken,
+      },
+      body: JSON.stringify({ id: currentSubmissionId, alasan }),
+    });
+
+    const data = await res.json();
+    hideLoading();
+
+    if (data.success) {
+      showToast('❌ User ditolak', 'success');
+      closeRejectModal();
+      closeModal();
+      loadSubmissions();
+      loadBranda();
+    } else {
+      showToast('❌ ' + data.message, 'error');
+    }
+  } catch (err) {
+    hideLoading();
+    showToast('❌ Gagal konek', 'error');
+  }
+}
+
+/* ============================================================
+   FULLSCREEN
+   ============================================================ */
+function openFullscreen(src) {
+  document.getElementById('fullscreenImg').src = src;
+  document.getElementById('fullscreen').classList.add('active');
+}
+
+function closeFullscreen() {
+  document.getElementById('fullscreen').classList.remove('active');
+}
+
+/* ============================================================
+   INIT
+   ============================================================ */
+(function init() {
+  if (adminToken) {
+    showDashboard();
+    loadBranda();
+    loadSubmissions();
+  }
+
+  document.getElementById('loginUsername').addEventListener('keypress', e => {
+    if (e.key === 'Enter') document.getElementById('loginPassword').focus();
+  });
+  document.getElementById('loginPassword').addEventListener('keypress', e => {
+    if (e.key === 'Enter') doLogin();
+  });
+
+  document.getElementById('modalDetail').addEventListener('click', e => {
+    if (e.target.id === 'modalDetail') closeModal();
+  });
+  document.getElementById('modalReject').addEventListener('click', e => {
+    if (e.target.id === 'modalReject') closeRejectModal();
+  });
+})();
