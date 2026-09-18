@@ -33,7 +33,7 @@ const CONFIG = {
     name: 'Zestiria Catalyst',
     title: 'CEK AKUN TIKTOK',
     subtitle: 'Masukkan username TikTok kamu',
-    backgroundURL: 'https://cdn.phototourl.com/free/2026-09-16-c90714dc-c5e6-4011-afa6-dca780478ba3.jpg',
+    backgroundURL: 'https://cdn.phototourl.com/free/2026-09-18-398009e4-9c2b-493d-8fa6-78310434aab6.jpg',
     footer: '@mikosenpaii_',
   },
   
