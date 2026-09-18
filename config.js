@@ -1,11 +1,10 @@
 /* ============================================================
-   ⚙️ CONFIG TERPUSAT — EDIT DI SINI AJA
+   ⚙️ CONFIG TERPUSAT
    ============================================================ */
 const CONFIG = {
   
   /* ==========================================================
-     🔗 URL BOT SERVER (Cloudflare Tunnel)
-     ⚠️ URL BAKAL BERUBAH KALAU TUNNEL RESTART
+     🔗 API URL
      ========================================================== */
   API_URL: 'https://aside-efforts-ethernet-determine.trycloudflare.com',
   
@@ -13,6 +12,19 @@ const CONFIG = {
      🔗 LINK GRUP WA
      ========================================================== */
   joinURL: 'https://chat.whatsapp.com/Dsv0filIr8X3e00VKAiQbN?s=cl&p=a&mlu=4&ilr=4',
+  
+  /* ==========================================================
+     🔍 SEO — SEARCH ENGINE OPTIMIZATION
+     ========================================================== */
+  seo: {
+    title: 'Zestiria Catalyst — Seleksi',
+    description: 'Join Zestiria Catalyst — Komunitas eksklusif kreator TikTok! Seleksi member baru, cek akun, kirim bukti, dan join grup WhatsApp kami. Gratis & mudah!',
+    keywords: 'Zestiria Catalyst, seleksi TikTok, komunitas kreator, grup WhatsApp, join member, seleksi online',
+    author: 'MikoSenpai',
+    faviconURL: 'https://cdn.phototourl.com/free/2026-09-18-398009e4-9c2b-493d-8fa6-78310434aab6.jpg',
+    ogImage: 'https://cdn.phototourl.com/free/2026-09-18-398009e4-9c2b-493d-8fa6-78310434aab6.jpg',
+    siteURL: 'https://zestiria.my.id',
+  },
   
   /* ==========================================================
      🎨 BRANDING
@@ -60,10 +72,10 @@ const CONFIG = {
     
     helpTitle: 'INFO CN & HASHTAG',
     helpCNTitle: '📝 Format CN (Nama TikTok)',
-    helpCNDesc: 'Pilih salah satu format di bawah, ganti "namamu" dengan nama kamu:',
+    helpCNDesc: 'Pilih salah satu format di bawah:',
     helpHashtagTitle: '🏷️ Hashtag Wajib',
-    helpHashtagDesc: 'Video kamu harus ada salah satu hashtag ini di caption:',
-    helpTips: '💡 <strong>Tips:</strong> Setelah ganti CN di TikTok, tunggu 1-2 menit biar ke-update, baru cek lagi di sini.',
+    helpHashtagDesc: 'Video harus ada salah satu hashtag ini:',
+    helpTips: '💡 <strong>Tips:</strong> Setelah ganti CN, tunggu 1-2 menit biar ke-update.',
     btnCopy: 'Salin',
     btnCopied: 'Disalin!',
     
@@ -93,15 +105,11 @@ const CONFIG = {
   /* ==========================================================
      🎯 ATURAN SELEKSI
      ========================================================== */
-  tahap1: {
-    minFollower: 30,
-  },
-  
+  tahap1: { minFollower: 30 },
   tahap2: {
     wajibDomain: 'tiktok.com',
     wajibHashtag: ['margazestiria', 'zestiriacreator'],
   },
-  
   blacklist: ['6287761249828', '6285809026857'],
   
   /* ==========================================================
@@ -129,17 +137,13 @@ const CONFIG = {
   },
   
   /* ==========================================================
-     📝 POPUP HELP — FORMAT CN
+     📝 POPUP HELP
      ========================================================== */
   helpCN: [
     { label: "『𝐙𝐂』𝙉𝙖𝙢𝙖𝙡𝙪" },
     { label: "𝙉𝙖𝙢𝙖𝙡𝙪 ft 𝐙𝐂" },
     { label: "𝙉𝙖𝙢𝙖𝙡𝙪 Zet'cee" },
   ],
-  
-  /* ==========================================================
-     🏷️ POPUP HELP — HASHTAG WAJIB
-     ========================================================== */
   helpHashtag: [
     { label: "#margazestiria" },
     { label: "#zestiriacreator" },
