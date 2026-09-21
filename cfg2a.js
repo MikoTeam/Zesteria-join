@@ -11,7 +11,7 @@ const CONFIG = {
   /* ==========================================================
      🔗 LINK GRUP WA
      ========================================================== */
-  joinURL: 'https://chat.whatsapp.com/Dsv0filIr8X3e00VKAiQbN?s=cl&p=a&mlu=4&ilr=4',
+  joinURL: 'https://chat.whatsapp.com/Dsv0filIr8X3e00VKAiQbN',
   
   /* ==========================================================
      🔍 SEO — SEARCH ENGINE OPTIMIZATION
